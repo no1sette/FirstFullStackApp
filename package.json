@@ -1,0 +1,28 @@
+{
+  "name": "FirstFullStackApp",
+  "version": "1.0.0",
+  "description": "My first full stack up  Hopefully this goes well. This is possibly my first time working with GitHub",
+  "main": "index.js",
+  "scripts": {
+    "server":"nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/no1sette/FirstFullStackApp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/no1sette/FirstFullStackApp/issues"
+  },
+  "homepage": "https://github.com/no1sette/FirstFullStackApp#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.10.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
