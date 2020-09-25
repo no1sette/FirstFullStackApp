@@ -4,7 +4,7 @@
   "description": "My first full stack up  Hopefully this goes well. This is possibly my first time working with GitHub",
   "main": "index.js",
   "scripts": {
-    "server":"nodemon server.js"
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
