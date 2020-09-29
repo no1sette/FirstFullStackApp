@@ -1,12 +1,17 @@
 const mongoose = require("mongoose");
+const hole = process.env.RABBITHOLE;
 
-const connect = () => {
+const connect = async () => {
   try {
-    const conn = mongoose.connect(process.env.RABBITHOLE, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useFindAndModify: false,
-    });
+    const conn = await mongoose.connect(
+      hole,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+      },
+      console.log("db Connected")
+    );
   } catch (error) {
     console.log(error);
   }

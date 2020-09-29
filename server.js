@@ -1,9 +1,12 @@
+require("dotenv").config({ path: "./config/config.env" });
+
 const express = require("express");
 const app = express();
 const todo = require("./routes/Todo");
 const connectdb = require("./config/connectdb");
-const connect = require("./config/connectdb");
 
+//Configuration
+app.use(express.json());
 connectdb();
 
 app.use("/API/V1", todo);
