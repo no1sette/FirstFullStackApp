@@ -1,12 +1,10 @@
 const router = require("express").Router();
 const TodoModel = require("../models/TodoModel");
 
-//app.get("/API", (req,resp)=>{resp.send("Hello World")});
-router.get("/Todo", async (req, resp) => {
+router.get("/GetTodo", async (req, resp) => {
   try {
     const allTodo = await TodoModel.find();
-    resp.json({ data: allTodo });
-    // console.log(allTodo);
+    resp.json({ Task: allTodo });
   } catch (error) {
     console.log(error);
   }
@@ -14,13 +12,12 @@ router.get("/Todo", async (req, resp) => {
 
 router.post("/AddTodo", async (req, resp) => {
   try {
-    const jelly = req.body.action;
-    const todo = TodoModel({ action: jelly });
+    const item = req.body.todoItem;
+    const todo = TodoModel({ todoItem: item });
     const SavetoDB = await todo.save();
-    // console.log(SavetoDB);
-    resp.json({ data: SavetoDB });
+    resp.json({ Task: SavetoDB.todoItem, WrittenOn: SavetoDB.date });
   } catch (error) {
-    console.log("post failed");
+    console.log(error);
   }
 });
 

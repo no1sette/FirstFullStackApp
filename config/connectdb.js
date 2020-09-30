@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-const hole = process.env.RABBITHOLE;
+const secretENV = process.env.RABBITHOLE;
 
 const connect = async () => {
   try {
     const conn = await mongoose.connect(
-      hole,
+      secretENV,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,
