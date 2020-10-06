@@ -1,17 +1,19 @@
 const router = require("express").Router();
 const TodoModel = require("../models/TodoModel");
 
+//GET All Todo Items List
 router.get("/GetTodo", async (req, resp) => {
   try {
     const allTodo = await TodoModel.find();
     resp.status(200).json({ Task: allTodo });
   } catch (error) {
-    resp.status(500).json({ error: "not processing" });
+    resp.status(500).json({ error: "500 failure" });
     console.log(error);
   }
 });
 
-router.get("/Get1Todo/:id", async (req, resp) => {
+//GET one Todo Item by ID
+router.get("/GetTodo/:id", async (req, resp) => {
   try {
     const byId = req.params.id;
     const oneTodo = await TodoModel.findById(byId);
@@ -29,10 +31,11 @@ router.get("/Get1Todo/:id", async (req, resp) => {
   }
 });
 
+//PUT modify Todo Item by ID
 router.put("/PutTodo/:id", async (req, resp) => {
   const byId = req.params.id;
   const Nitem = req.body.todoItem;
-  const NDateItem = req.body.date;
+  // const NDateItem = Date.now;
   const NLocalItem = req.body.local;
   try {
     const NTask = await TodoModel.updateOne(
@@ -41,17 +44,18 @@ router.put("/PutTodo/:id", async (req, resp) => {
     );
 
     if (NTask) {
-      resp.json({ data: NTask });
+      resp.send("Updated");
     } else {
       resp.send("Failed to update");
     }
   } catch (error) {
+    resp.status(404).json({ error: "ID not found" });
     console.log(error);
-    resp.send("ID Not found");
   }
 });
 
-router.delete("/Delete1Todo/:id", async (req, resp) => {
+//DELETE Todo Item by ID
+router.delete("/DeleteTodo/:id", async (req, resp) => {
   try {
     const byId = req.params.id;
     const oneTodo = await TodoModel.deleteOne({ _id: byId });
@@ -59,13 +63,16 @@ router.delete("/Delete1Todo/:id", async (req, resp) => {
     if (oneTodo) {
       resp.send("Item Deleted");
     } else {
-      resp.status(404).json({ error: "not found" });
+      resp.status(404).json({ error: "ID not found" });
+      console.log(error);
     }
   } catch (error) {
-    resp.status(404).json({ error: "not found" });
+    resp.status(500).json({ error: "not found" });
+    console.log(error);
   }
 });
 
+//POST adds one Todo Item
 router.post("/AddTodo", async (req, resp) => {
   try {
     const item = req.body.todoItem;
@@ -84,7 +91,7 @@ router.post("/AddTodo", async (req, resp) => {
       Location: SavetoDB.local,
     });
   } catch (error) {
-    resp.status(500).json({ error: "not processing" });
+    resp.status(500).json({ error: "not able to add" });
     console.log(error);
   }
 });
